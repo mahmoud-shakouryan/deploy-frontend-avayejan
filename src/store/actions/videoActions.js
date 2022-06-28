@@ -1,13 +1,15 @@
 import axios from 'axios';
 import * as actions from './actionTypes';
 
+const axiosInstance = axios.create({ baseURL: Process.env.REACT_APP_API_URL});
+
 
 export const videoList = () => {
     return async dispatch =>{
         dispatch({ type: actions.VIDEO_LIST_REQUEST});
 
         try {
-            const {data} = await axios.get('/api/videos');
+            const {data} = await axiosInstance.get('/videos');
             dispatch({ type: actions.VIDEO_LIST_SUCCESS, payload: data});
         } catch (err) {
             console.log('videoAcions videoList error', err.message)
@@ -22,7 +24,7 @@ export const videoDetails = (id) => {
     return async dispatch => {
         dispatch({ type: actions.VIDEO_DETAILS_REQUEST});
         
-        axios.get(`/api/videos/${id}`).then(result=>{
+        axiosInstance.get(`/videos/${id}`).then(result=>{
             
             if(!result.data){
                return dispatch({type: actions.VIDEO_DETAILS_FAIL});

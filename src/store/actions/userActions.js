@@ -3,13 +3,14 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 
+const axiosInstance = axios.create({ baseURL: Process.env.REACT_APP_API_URL});
 
 
 export const signinAction = (email, password) => {
     return async (dispatch) => {
         dispatch({type: actions.USER_SIGNIN_REQUEST});
         try{
-            const {data} = await axios.post('/api/users/signin', { email: email, password: password });
+            const {data} = await axiosInstance.post('/users/signin', { email: email, password: password });
             dispatch({ type:actions.USER_SIGNIN_SUCCESS, payload: data });
             toast.success('خوش آمدید')
         }
@@ -27,7 +28,7 @@ export const signupAction = (name, email, password) => {
     return async (dispatch) => {
         dispatch({ type: actions.USER_SIGNUP_REQUEST });
         try {
-            const {data} = await axios.post('/api/users/signup', { name: name, email: email, password: password });
+            const {data} = await axiosInstance.post('/users/signup', { name: name, email: email, password: password });
             dispatch({ type: actions.USER_SIGNUP_SUCCESS, payload: data });
             dispatch({ type: actions.USER_SIGNIN_SUCCESS, payload: data });
             //dispatch({ type: actions.USER_SIGNUP_RESET });
