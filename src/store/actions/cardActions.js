@@ -1,7 +1,7 @@
 import * as actions from './actionTypes';
 import axios from 'axios';
 
-const axiosInstance = axios.create({ baseURL: Process.env.REACT_APP_API_URL});
+const axiosInstance = axios.create({ baseURL: "http://37.32.28.165/api"});
 export const addToCard = (videoId) => {
     return async (dispatch) => {
         try {

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 
-const axiosInstance = axios.create({ baseURL: Process.env.REACT_APP_API_URL});
+const axiosInstance = axios.create({ baseURL: "http://37.32.28.165/api"});
 
 
 export const signinAction = (email, password) => {

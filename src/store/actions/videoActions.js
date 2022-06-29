@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as actions from './actionTypes';
 
-const axiosInstance = axios.create({ baseURL: Process.env.REACT_APP_API_URL});
+const axiosInstance = axios.create({ baseURL: "http://37.32.28.165/api"});
 
 
 export const videoList = () => {

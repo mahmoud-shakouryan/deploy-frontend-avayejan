@@ -3,9 +3,9 @@ import PaidOutlinedIcon from '@mui/icons-material/PaidOutlined';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { removeFromCard } from "../store/actions/cardActions.js";
+import { pay, removeFromCard } from "../store/actions/cardActions.js";
 import { toast } from 'react-toastify';
 import CurrencyExchangeOutlinedIcon from '@mui/icons-material/CurrencyExchangeOutlined';
 
