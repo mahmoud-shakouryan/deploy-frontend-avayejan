@@ -20,3 +20,17 @@ export const removeFromCard = (videoId) => {
         dispatch({ type: actions.REMOVE_FROM_CARD, payload: videoId });
     }
 }
+
+
+export const pay = (price, videoId) =>{
+    return async (dispatch, getState) =>{
+        const store = getState();
+        const userInfo = store.userSigninReducer.userInfo;
+        try{
+            const result = await axios.post('/api/pay/', { price: price, videoId: videoId }, { headers: { Authorization: `Bearer ${userInfo.token}`}});
+        }
+        catch(err){
+            console.log('pay error>>>', err);
+        }
+    }
+}

@@ -42,6 +42,11 @@ const CardItem = ({video}) => {
       navigate(`/card/${id}`)
     }
 
+    const payHandler = () =>{
+      dispatch(pay(price, id));
+    }
+
+
     return (
       <>
     <div className='p-1 w-72 h-80 bg-white flex flex-col rounded-xl shadow-sm shadow-dark sm:hover:scale-105  duration-150 font-firstFont'>
@@ -61,7 +66,7 @@ const CardItem = ({video}) => {
           { (cardItems && cardItems.find( cardItem => cardItem.id === id )) ?  <button className=' h-full w-full rounded-md shadow-sm shadow-dark font-bold text-dark flex items-center justify-center gap-2' onClick={()=>removeFromCartHandler(cardItems.find( cardItem => cardItem.id === id ).id)}><DeleteOutlineOutlinedIcon/><span>حذف از سبد خرید</span></button> : <button className='bg-orange h-full w-full rounded-md shadow-sm shadow-dark font-bold text-dark flex items-center justify-center gap-2' onClick={addToCardHandler}><AddShoppingCartIcon/><span>افزودن به سبد خرید</span> </button> }
           </div>
           <div className="basis-1/6  p-1 text-xs">
-          <button className='bg-dark text-theWhite font-thin h-full w-full rounded-md shadow-sm shadow-dark  flex items-center justify-center gap-3' ><CurrencyExchangeOutlinedIcon className='font-thin'/><span>پرداخت</span></button>
+          <button className='bg-dark text-theWhite font-thin h-full w-full rounded-md shadow-sm shadow-dark  flex items-center justify-center gap-3' onClick={payHandler} ><CurrencyExchangeOutlinedIcon className='font-thin'/><span>پرداخت</span></button>
           </div>
           <div className="basis-1/6  p-1 text-xs">
           <button disabled className='bg-dark text-theWhite font-thin h-full w-full rounded-md shadow-sm shadow-dark  flex items-center justify-center gap-2' ><FileDownloadOutlinedIcon className='font-thin'/><span>دریافت لینک دانلود</span></button>
