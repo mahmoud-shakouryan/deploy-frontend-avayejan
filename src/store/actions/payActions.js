@@ -10,7 +10,7 @@ export const pay = (price, videoId) =>{
         const store = getState();
         const userInfo = store.userSigninReducer.userInfo;
         try{
-            const result = await axios.post('/api/pay', { price: price, videoId: videoId }, { headers: { Authorization: `Bearer ${userInfo.token}`}});
+            const result = await axios.post('https://www.avayejan.ir/api/pay', { price: price, videoId: videoId }, { headers: { Authorization: `Bearer ${userInfo.token}`}});
             dispatch({ type: actions.PAY_SUCCESS, payload: result.data.authority });
         }
         catch(err){
