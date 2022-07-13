@@ -7,7 +7,6 @@ const axiosInstance = axios.create({ baseURL: "https://www.avayejan.ir/api"});
 export const videoList = () => {
     return async dispatch =>{
         dispatch({ type: actions.VIDEO_LIST_REQUEST});
-
         try {
             const {data} = await axiosInstance.get('/videos');
             dispatch({ type: actions.VIDEO_LIST_SUCCESS, payload: data});
