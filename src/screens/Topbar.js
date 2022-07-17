@@ -50,7 +50,6 @@ const Topbar = () => {
           <li className="h-full hover:text-orange cursor-pointer">
             <Link to="/contact" className=" h-full flex items-center justify-center">تماس با ما</Link>
           </li>
-          
           <li className="h-full hover:text-orange cursor-pointer">
             <Link to="/signup" className=" h-full flex items-center justify-center">ثبت نام</Link>
           </li>

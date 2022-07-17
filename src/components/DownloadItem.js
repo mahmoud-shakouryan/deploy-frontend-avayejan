@@ -1,24 +1,19 @@
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
-import PaidOutlinedIcon from '@mui/icons-material/PaidOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import BrowserUpdatedIcon from '@mui/icons-material/BrowserUpdated';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-
-
-const DownloadItem = ({ video }) => {
-
-  const { id, videoName, category, likes, numOfDownloads, price, duration } = video;
+import { Link } from 'react-router-dom';
 
 
 
-    const downloadHandler = () =>{
-      axios.get('/api/videos/download');
-    }
+const DownloadItem = ({ video, downloadHandler  }) => {
+
+  const { id, videoName, category, likes, numOfDownloads, duration } = video;
+
+
+    
 
   return (
     <>

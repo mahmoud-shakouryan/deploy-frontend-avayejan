@@ -14,11 +14,10 @@ import DownloadScr from './screens/DownloadScr';
 
 
 
-
 function App() {
   return (
     <BrowserRouter>
-    <div className="w-screen h-screen">
+    <div className="w-screen h-screen bg-theWhite">
       <Topbar/>
       <ToastContainer className='toastContainer' autoClose='1000'/>
       <Routes>
@@ -31,8 +30,6 @@ function App() {
         <Route path='/card' element={<Card/>}/>
         <Route path='/contact' element={<Contact/>}/>
         <Route path='/myvideos' element={<DownloadScr/>}/>
-
-
         
       </Routes>
     </div>
