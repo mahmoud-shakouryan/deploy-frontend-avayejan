@@ -1,7 +1,7 @@
 import * as actions from './actionTypes';
 import axios from 'axios';
 
-const axiosInstance = axios.create({ baseURL: "http://37.32.28.60/api"});
+const axiosInstance = axios.create({ baseURL: "https://www.avayejan.ir/api"});
 export const addToCard = (videoId) => {
     return async (dispatch) => {
         try {

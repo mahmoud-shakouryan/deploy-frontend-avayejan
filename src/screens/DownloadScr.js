@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { videoList } from "../store/actions/videoActions";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { dlListAction } from "../store/actions/dlListActions";
 import ErrorBox from "../components/ErrorBox";
@@ -8,6 +7,7 @@ import { toast } from 'react-toastify';
 import LinkBar from "../components/LinkBar";
 import { cardEmpty } from "../store/actions/cardActions";
 import DownloadItem from "../components/DownloadItem";
+import { useId } from "react";
 
 
 
@@ -20,9 +20,10 @@ const DownloadScr = () => {
   const { userInfo } = userSigninState;
 
   const { videoIdsArr, loading, error } = useSelector( state => state.dlListReducer );
+  console.log(videoIdsArr);
   const { videos } = useSelector( state => state.videoListReducer);
   
-
+ const id = useId();
  
   
   const [searchParams] = useSearchParams();
@@ -57,8 +58,9 @@ const DownloadScr = () => {
       return navigate('/signin');
     }
     if(status){
+      console.log('umad tu if(status)')
       dispatch(dlListAction(userInfo._id, status, order_id, payId));
-       dispatch(videoList());
+       //dispatch(videoList());
        toast.success('پرداخت موفق')
        dispatch(cardEmpty());
     }
@@ -66,7 +68,7 @@ const DownloadScr = () => {
     console.log('umad tu if(!status)')
       dispatch(dlListAction(userInfo._id, status = null, order_id, payId));
     }
-  },[dispatch]);
+  },[dispatch, ]);
 
   
   return (
@@ -74,13 +76,10 @@ const DownloadScr = () => {
     <div className="h-screen w-screen bg-theWhite  fixed top-14 flex justify-center gap-3">
        { loading ? <div className="w-full font-firstFont font-semibold text-dark text-center">... در حال دریافت</div> : error ? <ErrorBox error={error}/>
        : videoIdsArr.length == 0 ? <div className="w-full font-firstFont font-semibold text-dark text-center"> شما تاکنون هیچ ویدیویی خریداری نکرده‌اید</div>
-       : myVideos.length == 0 ?
+       : loading == false ?
        (
-        <div className="w-full font-firstFont font-semibold text-dark text-center">... </div>
-       ):
-       (
-        myVideos.map( myVideo => <DownloadItem key={myVideo.id} video={myVideo} downloadHandler={downloadHandler}/>)
-       )
+        myVideos.map( myVideo => <DownloadItem key={id} video={myVideo} downloadHandler={downloadHandler}/>)
+       ): null
        }
     </div>
        <ul className="h-36 w-full fixed bottom-0 flex flex-row-reverse justify-center items-center gap-5">
