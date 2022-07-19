@@ -44,7 +44,7 @@ const DownloadScr = () => {
     console.log('umad tu useEffect')
     if(!userInfo){
       toast.warn('ابتدا وارد حساب شوید', options);
-      return navigate('/signin');
+      return navigate('/signin?redirect=myvideos');
     }
     if(status){
       dispatch(dlListAction(userInfo._id, status, order_id, payId));

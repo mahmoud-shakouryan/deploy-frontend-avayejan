@@ -1,23 +1,10 @@
-import { useDispatch, useSelector } from "react-redux"
-import { linksAction } from "../store/actions/dlListActions";
 
-const LinkBar = ({title}) => {
+
+const LinkBar = ({index, link}) => {
   
-  const theNum = title.split('.')[0].match(/\d+/);
-  
-
-  const { link } = useSelector( state => state.linksReducer);
-
-  const dispatch = useDispatch();
-  const downloadHandler = () => {
-    dispatch(linksAction(title));
-  }
-
-
   return (
-    
-     <div onClick={downloadHandler} className="w-32 sm:w-48 bg-dark text-orange flex items-center justify-center gap-2 font-firstFont text-xs p-3 shadow-dark rounded shadow-md ">
-        { link ? <a className="cursor-pointer w-full text-center" href={`${link}`} download target='_blank'>  {theNum} کلیک  دانلود</a> : <span className="text-xs cursor-pointer w-full text-center">پارت  { theNum == null ? '' : `${theNum}`}</span>}
+     <div className="w-32 sm:w-48 bg-dark mt-5 m-auto  text-orange text-center  font-firstFont text-xs  shadow-dark rounded shadow-md ">
+        { link ? <a className="block cursor-pointer w-full h-full  text-center p-3" href={`${link}`} download target='_blank'>  {index+1} دانلود</a> : null}
      </div>
     
   )
