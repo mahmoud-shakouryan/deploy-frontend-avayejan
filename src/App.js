@@ -19,7 +19,7 @@ function App() {
     <BrowserRouter>
     <div className="w-screen h-screen bg-theWhite">
       <Topbar/>
-      <ToastContainer className='toastContainer' autoClose='1000'/>
+      <ToastContainer autoClose='1000' />
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/signin' element={<Signin/>}/>

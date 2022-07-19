@@ -17,11 +17,12 @@ export const dlListAction = (user, status, order_id, payId) => {
 };
 
 
-export const linksAction = (videoPartName) =>{
+export const linksAction = (allFiles) =>{
     return async dispatch => {
         dispatch({ type: actions.LINK_REQUEST });
         try{
-            const { data } = await axios.post('https://www.avayejan.ir/api/videos/listtoget', { videoPartName: videoPartName });
+            const { data } = await axios.post('https://www.avayejan.ir/api/videos/listtoget', { allFiles: allFiles });
+            console.log('links action', data)
             dispatch({ type: actions.LINK_SUCCESS , payload: data });
         }
         catch(err){
