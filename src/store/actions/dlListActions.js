@@ -6,7 +6,7 @@ export const dlListAction = (user, status, order_id, payId) => {
     return async dispatch =>{
         dispatch({ type: actions.DLLIST_REQUEST });
         try{
-            const {data} = await axios.post('https://www.avayejan.ir/api/videos/dllist', { userId: user, status: status, order_id: order_id, payId: payId});
+            const {data} = await axios.post('https://www.avayejaan.ir/api/videos/dllist', { userId: user, status: status, order_id: order_id, payId: payId});
             dispatch({ type: actions.DLLIST_SUCCESS, payload: data });    //data un araye az id'ha
         }
         catch(err){
@@ -21,7 +21,7 @@ export const linksAction = (allFiles) =>{
     return async dispatch => {
         dispatch({ type: actions.LINK_REQUEST });
         try{
-            const { data } = await axios.post('https://www.avayejan.ir/api/videos/listtoget', { allFiles: allFiles });
+            const { data } = await axios.post('https://www.avayejaan.ir/api/videos/listtoget', { allFiles: allFiles });
             console.log('links action', data)
             dispatch({ type: actions.LINK_SUCCESS , payload: data });
         }

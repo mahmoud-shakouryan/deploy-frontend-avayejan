@@ -1,12 +1,14 @@
 import * as actions from './actionTypes';
-import axios from 'axios';
+import { vidsArr } from '../../utils/data';
 
-const axiosInstance = axios.create({ baseURL: "https://www.avayejan.ir/api"});
+
+
+
 export const addToCard = (videoId) => {
     return async (dispatch) => {
         try {
-            const result = await axiosInstance.get(`/videos/${videoId}`);
-            const video = result.data;
+            // const result = await axiosInstance.get(`/api/videos/${videoId}`);
+            const video = vidsArr.find(video => video.id == videoId);
             dispatch({ type: actions.ADD_TO_CARD, payload: video});
         } catch (err) {
             console.log('cardActions addToCard error: ', err);
@@ -28,3 +30,5 @@ export const cardEmpty = () =>{
         dispatch({ type: actions.CART_EMPTY });
     }
 }
+
+
