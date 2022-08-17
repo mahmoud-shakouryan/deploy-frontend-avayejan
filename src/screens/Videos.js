@@ -34,7 +34,7 @@ const Videos = () => {
 
   return (
     <div className="h-screen w-screen bg-theWhite  fixed top-10">
-      <div className=" flex flex-wrap justify-around  items-start gap-4 pb-10  pr-2 pl-2 pt-4  w-screen h-screen overflow-y-scroll">
+      <div className=" flex flex-wrap justify-around  items-start gap-4 pb-24  pr-2 pl-2 pt-4  w-screen h-screen overflow-y-scroll">
       { loading ? <div className="w-full font-firstFont font-semibold text-dark text-center">... در حال دریافت</div> : error ? <ErrorBox error={error}/> 
       :(
         curPageVids.map(video => (
