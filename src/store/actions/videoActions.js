@@ -1,5 +1,6 @@
 import * as actions from "./actionTypes";
 import { vidsArr } from "../../utils/data.js";
+import axios from "axios";
 
 export const videoList = (page) => {
   return (dispatch) => {
