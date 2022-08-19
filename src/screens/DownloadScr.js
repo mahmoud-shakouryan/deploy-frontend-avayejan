@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { dlListAction } from "../store/actions/dlListActions";
 import ErrorBox from "../components/ErrorBox";
 import { toast } from 'react-toastify';
 import { removeFromCard } from "../store/actions/cardActions";
 import DownloadItem from "../components/DownloadItem";
 import VideoLibraryOutlinedIcon from '@mui/icons-material/VideoLibraryOutlined';
+import { getPaymentStatusAction } from "../store/actions/payActions";
 
 
 
@@ -19,9 +19,10 @@ const DownloadScr = () => {
   
   const userSigninState = useSelector( state => state.userSigninReducer );
   const { userInfo } = userSigninState;
+  console.log('userInfo', userInfo)
   
 
-  const { videoIdsArr, loading, error } = useSelector( state => state.dlListReducer );
+  const { videoIdsArr, loading, error } = useSelector( state => state.paymentStatusReducer );
   const { videos } = useSelector( state => state.videoListReducer);
  
   
@@ -37,6 +38,7 @@ const DownloadScr = () => {
       myVideos.push(video);
     }
   }
+  console.log('myVideos', myVideos)
 
   
   
@@ -44,12 +46,14 @@ const DownloadScr = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(()=>{
+    console.log('DownloadScr useEffect')
     if(!userInfo){
+      console.log('!userInfo')
       toast.warn('ابتدا وارد حساب شوید', options);
       return navigate('/signin?redirect=myvideos');
     }
     if(status){
-      dispatch(dlListAction(userInfo._id, status, order_id, payId));
+      dispatch(getPaymentStatusAction(userInfo._id, status, order_id, payId));
        if(+status !== 100){
         toast.error('پرداخت ناموفق', options)
       }
@@ -59,7 +63,7 @@ const DownloadScr = () => {
        }
     }
     if(!status){
-      dispatch(dlListAction(userInfo._id, status = null, order_id, payId));
+      dispatch(getPaymentStatusAction(userInfo._id, status = null, order_id, payId));
     }
   },[dispatch]);
 

@@ -34,4 +34,22 @@ export const videoDetailsReducer = (state = videoDetailsInState, action) =>{
         default:
             return state;
     }
+};
+
+
+const myVidsLinksInitialState = { links: [], loading: false, error: false };
+
+export const myVidsLinksReducer = (state = myVidsLinksInitialState, action ) =>{
+    switch(action.type){
+        case actions.LINK_REQUEST:
+            return { ...state, loading: true , error: false };
+        case actions.LINK_SUCCESS:
+            // console.log([...state.links].includes(action.payload))
+            const updatedState = { ...state, links: action.payload, loading: false, error: false };
+            return updatedState
+        case actions.LINK_FAIL:
+            return { ...state, loading: false, error: action.payload };
+        default:
+            return state;
+    }
 }
