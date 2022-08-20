@@ -53,11 +53,12 @@ const DownloadScr = () => {
       return navigate('/signin?redirect=myvideos');
     }
     if(status){
-      dispatch(getPaymentStatusAction(userInfo._id, status, order_id, payId));
-       if(+status !== 100){
+      if(+status !== 10){
+        dispatch(getPaymentStatusAction(userInfo._id, status, order_id, payId));
         toast.error('پرداخت ناموفق', options)
       }
-      else if(+status === 100){
+      else if(+status === 10){
+         dispatch(getPaymentStatusAction(userInfo, status, order_id, payId));
          dispatch(removeFromCard(order_id));
          toast.success('پرداخت موفق', options)
        }
