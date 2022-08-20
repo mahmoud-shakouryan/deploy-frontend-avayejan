@@ -23,7 +23,7 @@ export const paymentStatusReducer = (state = paymentStatusInitialState, action) 
         case actions.GET_PAYMENT_STATUS_REQUEST:
             return { ...state, loading: true, error: false };
         case actions.GET_PAYMENT_STATUS_SUCCESS:
-            return { ...state, videoIdsArr: action.payload.paidVidIds, loading: false, error: false };
+            return { ...state, videoIdsArr: action.payload, loading: false, error: false };
         case actions.GET_PAYMENT_STATUS_FAIL:
             return { ...state, loading: false, error: action.payload };
         default:
