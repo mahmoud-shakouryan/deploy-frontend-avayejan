@@ -36,6 +36,23 @@ export const videoDetailsReducer = (state = videoDetailsInState, action) =>{
     }
 };
 
+const myVidsInitialState = {myVidsArr:[], loading: true, error: false };
+export const myVidsReducer = (state = myVidsInitialState, action )=>{
+    switch(action.type){
+        case actions.MY_VIDS_REQUEST:
+            return { ...state, loading: true , error: false };
+        case actions.MY_VIDS_SUCCESS:
+            console.log(action.payload)
+            const updatedState = { ...state, myVidsArr: action.payload, loading: false, error: false };
+            return updatedState
+        case actions.MY_VIDS_FAIL:
+            return { ...state, loading: false, error: action.payload };
+        default:
+            return state;
+    }
+};
+
+
 
 const myVidsLinksInitialState = { links: [], loading: false, error: false };
 
@@ -52,4 +69,4 @@ export const myVidsLinksReducer = (state = myVidsLinksInitialState, action ) =>{
         default:
             return state;
     }
-}
+};
