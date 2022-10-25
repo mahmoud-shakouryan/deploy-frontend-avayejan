@@ -7,7 +7,6 @@ import { vidsArr } from '../../utils/data';
 export const addToCard = (videoId) => {
     return async (dispatch) => {
         try {
-            // const result = await axiosInstance.get(`/api/videos/${videoId}`);
             const video = vidsArr.find(video => video.id == videoId);
             dispatch({ type: actions.ADD_TO_CARD, payload: video});
         } catch (err) {

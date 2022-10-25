@@ -1,13 +1,12 @@
+import axios from "axios";
 import * as actions from "./actionTypes";
 import { vidsArr } from "../../utils/data.js";
-import axios from "axios";
 
 export const videoList = (page) => {
   return (dispatch) => {
     dispatch({ type: actions.VIDEO_LIST_REQUEST });
     try {
-      // const {data} = await axios.get(`/api/videos?page=${page}`);
-      const vidsToSkip = (page - 1) * 4;
+      const vidsToSkip = page === 0 ? 0 : (page - 1) * 4;
       const thisPageVids = vidsArr.slice(vidsToSkip, vidsToSkip + 4);
       dispatch({ type: actions.VIDEO_LIST_SUCCESS, payload: { videos: vidsArr, thisPageVids: thisPageVids }});
     } catch (err) {
@@ -21,7 +20,6 @@ export const videoDetails = (id) => {
   return (dispatch) => {
     try {
       dispatch({ type: actions.VIDEO_DETAILS_REQUEST });
-      // axios.get(`/api/videos/${id}`).then(result=>{
       const video = vidsArr.find((video) => video.id == id);
       if (!video) {
         return dispatch({ntype: actions.VIDEO_DETAILS_FAIL, payload: "ویدیو یافت نشد"})
@@ -32,6 +30,7 @@ export const videoDetails = (id) => {
       dispatch({ type: actions.VIDEO_DETAILS_FAIL, payload: err.message })}
   };
 };
+
 
 export const myVidsAction = (status, userId, payId, order_id) => {
   return async dispatch =>{
@@ -46,17 +45,18 @@ export const myVidsAction = (status, userId, payId, order_id) => {
   }
 }
 
+
 export const myVidsLinksAction = (allFiles) =>{
-  return async dispatch => {
-      dispatch({ type: actions.LINK_REQUEST });
-      try{
-          const { data } = await axios.post('https://www.avayejaan.ir/api/videos/myvidslinks', { allFiles: allFiles });
-          console.log('links action', data)
-          dispatch({ type: actions.LINK_SUCCESS , payload: data });
-      }
-      catch(err){
-          console.log('linksAction axios error >>>', err);
-          dispatch({ type: actions.LINK_FAIL, payload: err.message });
-      }
-  }
+   return async dispatch => {
+       dispatch({ type: actions.LINK_REQUEST });
+       try{
+           const { data } = await axios.post('https://www.avayejaan.ir/api/videos/myvidslinks', { allFiles: allFiles });
+           console.log('links action', data)
+           dispatch({ type: actions.LINK_SUCCESS , payload: data });
+       }
+       catch(err){
+           console.log('linksAction axios error >>>', err);
+           dispatch({ type: actions.LINK_FAIL, payload: err.message });
+       }
+   }
 };

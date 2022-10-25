@@ -29,7 +29,6 @@ export const videoDetailsReducer = (state = videoDetailsInState, action) =>{
         case actions.VIDEO_DETAILS_SUCCESS:
             return { ...state, loading: false, video: action.payload };
         case actions.VIDEO_DETAILS_FAIL:
-            console.log(action.payload)
             return { ...state, loading: false, error: action.payload };
         default:
             return state;

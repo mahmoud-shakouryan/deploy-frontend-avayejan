@@ -10,7 +10,7 @@ export const signinAction = (email, password) => {
   return async (dispatch) => {
     dispatch({ type: actions.USER_SIGNIN_REQUEST });
     try {
-      const { data } = await axios.post("/api/users/signin", {
+      const { data } = await axios.post("https://www.avayejaan.ir/api/users/signin", {
         email: email,
         password: password,
       });
@@ -30,7 +30,7 @@ export const signupAction = (name, email, password, confirmPassword) => {
   return async (dispatch) => {
     dispatch({ type: actions.USER_SIGNUP_REQUEST });
     try {
-      const { data } = await axios.post("/api/users/signup", { name: name, email: email, password: password, confirmPassword: confirmPassword });
+      const { data } = await axios.post("https://www.avayejaan.ir/api/users/signup", { name: name, email: email, password: password, confirmPassword: confirmPassword });
       dispatch({ type: actions.USER_SIGNUP_SUCCESS, payload: data });
       dispatch({ type: actions.USER_SIGNIN_SUCCESS, payload: data });
       toast.success('عزیز، خوش آمدی '+ data.name, options);
