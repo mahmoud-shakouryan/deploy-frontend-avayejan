@@ -25,7 +25,6 @@ const DownloadScr = () => {
     userId = userInfo._id;
   }
   
-  //const { loading, error } = useSelector( state => state.paymentStatusReducer);
   const { loading, error, myVidsArr } = useSelector( state => state.myVidsReducer );
   const { videos } = useSelector( state => state.videoListReducer);
  
@@ -63,23 +62,12 @@ const DownloadScr = () => {
   
   const dispatch = useDispatch();
   useEffect(()=>{
-    console.log('useEffect')
     dispatch(videoList(1));
     dispatch(getPaymentStatusAction(status, order_id, payId));
     if(+status === 10) dispatch(removeFromCard(order_id))
   },[dispatch])
   
-  // useEffect(()=>{
-  //   console.log('umad 2nd useEffect')
-  //     if(userInfo){
-  //       console.log('umad tu if(userInfo)')
-  //       dispatch(myVidsAction(status, userInfo._id, payId, order_id))
-  //     }
-      
-  // },[dispatch, userId])
-  
   return (
-    
     <div className="h-screen w-screen bg-theWhite  fixed top-24 flex justify-center gap-3 flex-wrap overflow-y-scroll pb-28">
       <div className="w-full h-9 fixed top-12 left-0 text-center"><button onClick={myVidsHandler}  className="font-firstFont text-xs bg-theWhite border border-dark p-2 rounded text-dark shadow-sm shadow-dark sm:hover:scale-105 ease-out duration-150"><VideoLibraryOutlinedIcon className='mr-2'/>برای مشاهده ویدیوهای خود کلیک کنید  </button></div>
       {

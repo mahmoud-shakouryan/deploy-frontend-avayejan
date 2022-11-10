@@ -1,7 +1,7 @@
 import * as actions from '../actions/actionTypes';
+import {vidsArr} from '../../utils/data';
 
-
-const videoListInState = localStorage.getItem('videos') && localStorage.getItem('videoList') ? { videos: JSON.parse(localStorage.getItem('videos')), curPageVids:JSON.parse(localStorage.getItem('videoList')) ,loading: true } : { videos: [], curPageVids:[], loading: true};
+const videoListInState = localStorage.getItem('videos') && localStorage.getItem('videoList') ? { videos: JSON.parse(localStorage.getItem('videos')), curPageVids:JSON.parse(localStorage.getItem('videoList')) ,loading: true } : { videos: vidsArr, curPageVids:[], loading: true};
 
 export const videoListReducer = (state = videoListInState, action) => {
  switch (action.type){
@@ -60,7 +60,6 @@ export const myVidsLinksReducer = (state = myVidsLinksInitialState, action ) =>{
         case actions.LINK_REQUEST:
             return { ...state, loading: true , error: false };
         case actions.LINK_SUCCESS:
-            // console.log([...state.links].includes(action.payload))
             const updatedState = { ...state, links: action.payload, loading: false, error: false };
             return updatedState
         case actions.LINK_FAIL:
