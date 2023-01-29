@@ -13,7 +13,7 @@
   font-display: block;
 }
 
-.fade-anim img{
+/* .fade-anim img{
   animation: fadeAnim 5s;
 }
 
@@ -24,4 +24,4 @@
   to{
     opacity: 1;
   }
-}
+} */

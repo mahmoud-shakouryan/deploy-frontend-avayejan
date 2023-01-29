@@ -8,7 +8,7 @@ import CardItem from "../components/CardItem";
 import { toast } from "react-toastify";
 
 
-const Card = () => {
+const Cards = () => {
 
   const { id } = useParams();
   const cardState = useSelector( state => state.cardReducer );
@@ -51,4 +51,4 @@ const Card = () => {
   )
 }
 
-export default Card
+export default Cards
