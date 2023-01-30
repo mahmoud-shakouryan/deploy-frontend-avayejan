@@ -5,3 +5,8 @@ export const enToPerNum = (enNum) => {
     const per_num = enNumStr.replace(/\d/g, m => perDigits[parseInt(m)]);
     return per_num;
  };
+
+ export const getHahtagForm = (category) =>{
+    const underlined = category.replace(' ', '_');
+    return underlined + '#';
+}
