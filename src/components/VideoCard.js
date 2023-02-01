@@ -7,8 +7,10 @@ import { removeFromCard } from "../store/actions/cardActions.js";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import VideoDetail from "../screens/VideoDetail.js";
+import { getHahtagForm } from "../utils/utils.js";
 
-const VideoCard = ({ video, showModal, setShowModal }) => {
+const VideoCard = ({ video }) => {
+  const [showModal, setShowModal] = useState(false);
 
   const navigate = useNavigate();
   const { id, videoName, category, price, duration, imgSrc } = video;
@@ -31,6 +33,13 @@ const VideoCard = ({ video, showModal, setShowModal }) => {
     },
   };
 
+  const showModalHandler = () => {
+    setShowModal(true);
+  };
+  const closeModalHandler = () => {
+    setShowModal(false);
+  };
+
   const dispatch = useDispatch();
   const removeFromCartHandler = (videoIdToRemove) => {
     dispatch(removeFromCard(videoIdToRemove));
@@ -45,44 +54,58 @@ const VideoCard = ({ video, showModal, setShowModal }) => {
   };
 
   return (
-    <div className="bg-superLightBlue p-1 w-56 sm:w-64 h-72 sm:h-80 bg-white flex flex-col rounded-xl shadow-sm shadow-dark sm:hover:scale-105 duration-150 font-firstFont">
-      <div className="h-1/2 flex flex-col items-center justify-center text-sm sm:text-md font-bold mt-1 ">
-        <div className="w-full h-full flex">
-          <img src={imgSrc} className="w-full h-full object-cover rounded-md" />
-        </div>
+    <div className="bg-superLightBlue bg-active shadow-sm shadow-active rounded-xl p-1 w-40 sm:w-52 h-56 sm:h-68 bg-white flex flex-col items-center justify-start  font-firstFont">
+      {showModal && (
+        <VideoDetail
+          id={id}
+          showModalHandler={showModalHandler}
+          closeModalHandler={closeModalHandler}
+        />
+      )}
+
+      <div className="h-48 overflow-hidden w-full items-center justify-center">
+        <img src={imgSrc} className="w-full h-full object-cover rounded-lg" />
       </div>
-      <div className="text-center font-bold mt-2">
-        <p className="text-[14px]">{videoName}</p>
-        <p className="font-secondFont text-[8px] sm:text-[11px]">{category}</p>
+
+      <div className="text-center font-bold text-dark">
+        <p className="text-[10px]">{videoName}</p>
+        <p className="font-secondFont text-hashtag text-[8px]">
+          {getHahtagForm(category)}
+        </p>
       </div>
-      <div className="p-1 text-xs h-[16%] mt-4">
-          <button onClick={setShowModal} className="bg-lightBlue h-full w-full rounded-md shadow-sm shadow-dark font-bold text-dark flex items-center justify-center gap-2">
-            <MoreHorizIcon />
+      <div className="bg-red">
+        <div className="text-[8px] w-full">
+          <button
+            onClick={showModalHandler}
+            className="h-full w-full p-2 font-bold text-dark flex items-center justify-center gap-2"
+          >
+            <MoreHorizIcon style={{ fontSize: "14px" }} />
             <span>توضیح بیشتر</span>
           </button>
-      </div>
-      <div className="p-1 text-xs h-[16%]">
-        {cardItems && cardItems.find((cardItem) => cardItem.id === id) ? (
-          <button
-            className="bg-lightBlue h-full w-full rounded-md shadow-sm shadow-dark font-bold text-dark flex items-center justify-center gap-2"
-            onClick={() =>
-              removeFromCartHandler(
-                cardItems.find((cardItem) => cardItem.id === id).id
-              )
-            }
-          >
-            <DeleteOutlineOutlinedIcon />
-            <span>حذف از سبد خرید</span>
-          </button>
-        ) : (
-          <button
-            className="bg-lightBlue h-full w-full rounded-md shadow-sm shadow-dark font-bold text-dark flex items-center justify-center gap-2"
-            onClick={addToCardHandler}
-          >
-            <AddShoppingCartIcon />
-            <span>افزودن به سبد خرید</span>{" "}
-          </button>
-        )}
+        </div>
+        <div className="text-[8px] w-full">
+          {cardItems && cardItems.find((cardItem) => cardItem.id === id) ? (
+            <button
+              className="h-full w-full p-2 bg-dark font-bold text-dark flex items-center justify-center gap-2"
+              onClick={() =>
+                removeFromCartHandler(
+                  cardItems.find((cardItem) => cardItem.id === id).id
+                )
+              }
+            >
+              <DeleteOutlineOutlinedIcon style={{ fontSize: "14px" }} />
+              <span>حذف از سبد خرید</span>
+            </button>
+          ) : (
+            <button
+              className="h-full w-full p-2 bg-dark font-bold text-dark flex items-center justify-center gap-2"
+              onClick={addToCardHandler}
+            >
+              <AddShoppingCartIcon style={{ fontSize: "14px" }} />
+              <span>افزودن به سبد خرید</span>
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
