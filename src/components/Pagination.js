@@ -5,7 +5,7 @@ import { enToPerNum } from "../utils/utils";
 
 const Pagination = ({ totalPosts, currentSearchParam }) => {
   const currentPage = currentSearchParam;
-  const POST_PER_PAGE = 4;
+  const POST_PER_PAGE = 6;
   const hasNextPage = POST_PER_PAGE * currentPage < totalPosts;
   const hasPrevPage = currentPage > 1;
   const nextPage = currentPage + 1;
@@ -13,10 +13,10 @@ const Pagination = ({ totalPosts, currentSearchParam }) => {
   const lastPage = Math.ceil(totalPosts / POST_PER_PAGE);
 
   return (
-    <div>
-      <ul className="w-full h-14 flex justify-center items-center gap-4 sm:gap-10">
+    <div className="w-full h-full">
+      <ul className="w-full h-full flex justify-center items-start gap-4 sm:gap-10">
         {hasPrevPage ? (
-          <li className="w-6 h-6 text-xs font-semibold border border-active rounded-sm text-dark sm:hover:cursor-pointer">
+          <li className="w-6 h-6 text-xs font-semibold rounded-sm text-dark bg-shade sm:hover:cursor-pointer">
             <Link
               to={`/videos?page=${prevPage}`}
               className="w-full h-full flex justify-center items-center"
@@ -26,7 +26,7 @@ const Pagination = ({ totalPosts, currentSearchParam }) => {
           </li>
         ) : null}
         {currentPage !== 1 && prevPage !== 1 ? (
-          <li className="w-6 h-6 text-xs font-semibold border border-active rounded-sm text-dark sm:hover:cursor-pointer">
+          <li className="w-6 h-6 text-xs font-semibold rounded-sm text-dark bg-shade sm:hover:cursor-pointer">
             <Link
               to="/videos?page=1"
               className="w-full h-full flex justify-center items-center"
@@ -36,7 +36,7 @@ const Pagination = ({ totalPosts, currentSearchParam }) => {
           </li>
         ) : null}
         {hasPrevPage ? (
-          <li className="w-6 h-6 text-xs font-semibold border border-active rounded-sm text-dark sm:hover:cursor-pointer">
+          <li className="w-6 h-6 text-xs font-semibold rounded-sm text-dark bg-shade sm:hover:cursor-pointer">
             <Link
               to={`/videos?page=${prevPage}`}
               className="w-full h-full flex justify-center items-center"
@@ -45,7 +45,7 @@ const Pagination = ({ totalPosts, currentSearchParam }) => {
             </Link>
           </li>
         ) : null}
-        <li className="w-6 h-6 text-xs font-semibold bg-active rounded-sm text-dark sm:hover:cursor-pointer">
+        <li className="w-6 h-6 text-xs font-semibold bg-orange rounded-sm text-dark sm:hover:cursor-pointer">
           <Link
             to={`/videos?page=${currentPage}`}
             className="w-full h-full flex justify-center items-center"
@@ -54,7 +54,7 @@ const Pagination = ({ totalPosts, currentSearchParam }) => {
           </Link>
         </li>
         {hasNextPage ? (
-          <li className="w-6 h-6 text-xs font-semibold border border-active rounded-sm text-dark sm:hover:cursor-pointer">
+          <li className="w-6 h-6 text-xs font-semibold rounded-sm text-dark bg-shade sm:hover:cursor-pointer">
             <Link
               to={`/videos?page=${nextPage}`}
               className="w-full h-full flex justify-center items-center"
@@ -64,7 +64,7 @@ const Pagination = ({ totalPosts, currentSearchParam }) => {
           </li>
         ) : null}
         {lastPage !== currentPage && nextPage !== lastPage ? (
-          <li className="w-6 h-6 text-xs font-semibold border border-active rounded-sm text-dark sm:hover:cursor-pointer">
+          <li className="w-6 h-6 text-xs font-semibold rounded-sm text-dark bg-shade sm:hover:cursor-pointer">
             <Link
               to={`/videos?page=${lastPage}`}
               className="w-full h-full flex justify-center items-center"
@@ -73,7 +73,7 @@ const Pagination = ({ totalPosts, currentSearchParam }) => {
             </Link>
           </li>
         ) : null}
-        <li className="w-6 h-6 text-xs font-semibold border border-active rounded-sm text-dark sm:hover:cursor-pointer">
+        <li className="w-6 h-6 text-xs font-semibold rounded-sm text-dark bg-shade sm:hover:cursor-pointer">
           <Link
             to={`/videos?page=${nextPage}`}
             className="w-full h-full flex justify-center items-center"
