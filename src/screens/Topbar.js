@@ -9,6 +9,12 @@ import { toast } from "react-toastify";
 import { toastStyle as options } from "../utils/styles";
 import { enToPerNum } from "../utils/utils";
 
+const navLiStyle = "h-full md:w-[60px] xl:w-[75px]  cursor-pointer";
+const navLinkNotActive =
+  "h-full w-full flex items-center justify-center text-white hover:text-shade lg:hover:border-b lg:hover:border-shade";
+const navLinkActive =
+  "h-full w-full flex items-center justify-center text-shade sm:hover:text-shade lg:border-b lg:hover:border-shade";
+
 const Topbar = () => {
   const [activeSideMenu, setActiveSideMenu] = useState(false);
   const showMenu = () => {
@@ -21,11 +27,6 @@ const Topbar = () => {
   const cardState = useSelector((state) => state.cardReducer);
   const { cardItems } = cardState;
 
-  const navLiStyle = "h-full md:w-[60px]  cursor-pointer";
-  const navLinkNotActive =
-    "h-full w-full flex items-center justify-center text-white hover:text-shade lg:hover:border-b lg:hover:border-shade";
-  const navLinkActive =
-    "h-full w-full flex items-center justify-center text-shade sm:hover:text-shade lg:border-b lg:hover:border-shade";
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userSignoutHandler = () => {
@@ -36,7 +37,7 @@ const Topbar = () => {
   };
 
   return (
-    <div className="z-40 fixed top-0 left-0 right-0 w-screen h-10 flex justify-between items-center bg-dark text-white">
+    <div className="z-40 fixed top-0 left-0 right-0 w-screen h-10 flex justify-between items-center bg-dark text-white lg:pr-2">
       <NavLink
         to="/"
         className="w-28 h-full flex items-center text-xs cursor-pointer pl-2 font-firstFont md:hover:text-shade"
@@ -59,17 +60,17 @@ const Topbar = () => {
         </NavLink>
       </div>
       <MobileMenu showMenu={showMenu} activeSideMenu={activeSideMenu} />
-      <nav className="h-full basis-5/12 lg:basis-6/12 flex justify-between items-center pr-2">
+      <nav className="h-full basis-5/12 lg:basis-6/12 flex justify-between items-center">
         <div className="md:hidden w-full h-full text-right pr-2 flex justify-end items-center">
           <MenuOpenRoundedIcon
             onClick={showMenu}
-            className="cursor-pointer scale-150 sm:hover:text-shade"
+            className="cursor-pointer sm:hover:text-shade"
           />
         </div>
-        <ul className="hidden h-full w-full md:flex md:items-center md:justify-end md:text-[8.5px] lg:text-[10.5px] font-firstFont">
+        <ul className="hidden h-full w-full md:flex md:items-center md:justify-end md:text-[8px] lg:text-[9px] font-firstFont">
           <li className={navLiStyle}>
             <NavLink
-              to="/admin"
+              to="/admin/"
               className={({ isActive }) =>
                 isActive ? navLinkActive : navLinkNotActive
               }
