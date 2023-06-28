@@ -1,54 +1,84 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { addToCard } from "../store/actions/cardActions";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import VideoLibraryOutlinedIcon from '@mui/icons-material/VideoLibraryOutlined';
-import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
-import CardItem from "../components/CardItem";
+import { toastStyle as options } from "../utils/styles";
 import { toast } from "react-toastify";
+import CardItem from "../components/CardItem";
+import { homeBtnStyleHorizontal } from "../utils/styles";
+import ArrowLeftRoundedIcon from '@mui/icons-material/ArrowLeftRounded';
+import OndemandVideoRoundedIcon from "@mui/icons-material/OndemandVideoRounded";
 
 
 const Cards = () => {
 
   const { id } = useParams();
-  const cardState = useSelector( state => state.cardReducer );
+  const cardState = useSelector((state) => state.cardReducer);
   const { cardItems } = cardState;
-  const { userInfo } = useSelector( state => state.userSigninReducer );
+  const { userInfo } = useSelector((state) => state.userSigninReducer);
 
-  const options = { autoClose: 2000 ,style: { 'font':'shabnam', 'textAlign': 'center','color':'#16001E', 'fontFamily':'firstFont', 'fontSize':'14px', 'fontWeight':'bold'}}
-
-
+  const [selectedCard, setSelectedCard] = useState(null);
+  const selectedCardHandler = (key) => {
+    setSelectedCard(key !== selectedCard ? key : null);
+  };
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  useEffect(()=>{
-    if(!userInfo) {
-      toast.warn('ابتدا باید وارد شوید', options)
-      return navigate('/signin?redirect=card')
+  useEffect(() => {
+    if (!userInfo) {
+      toast.warn("ابتدا باید وارد شوید", options);
+      return navigate("/signin?redirect=card");
     }
-    if(id){
+    if (id) {
       dispatch(addToCard(id));
     }
   }, [dispatch, id]);
 
-
   return (
-    <div className="h-screen w-screen bg-theWhite  fixed top-10">
-      <div className=" h-14 w-full font-firstFont flex flex-col text-xs text-right pr-2 pt-2 ">
-        <p >.برای فعال شدن دکمه دانلود، باید ابتدا هزینه ویدیو آموزشی پرداخت شود -</p>
-        <p >.بعد از پرداخت موفق، به صورت آنی و همیشگی امکان دانلود دارید -</p>
-      </div>
-      <div className=" flex flex-wrap justify-around  items-start gap-4 pb-44  pr-2 pl-2 pt-4  w-screen h-screen overflow-y-auto">
-        { (cardItems && cardItems.length === 0) ? (
+    <div className="h-screen w-screen bg-white fixed top-10 text-dark">
+      {cardItems.length > 0 ? (
+        <div className=" bg-shade h-14 m-1 sm:w-[450px] md:w-[500px] sm:mx-auto font-firstFont flex flex-col items-center justify-center gap-1 text-[10px] sm:text-xs text-right rounded">
+          <p>
+            .برای فعال شدن امکان دانلود، باید ابتدا هزینه ویدیو آموزشی پرداخت
+            شود
+            <span ><ArrowLeftRoundedIcon/></span>
+          </p>
+          <p>
+            .بعد از پرداخت موفق، به صورت آنی و همیشگی امکان دانلود دارید
+            <span ><ArrowLeftRoundedIcon/></span>
+          </p>
+        </div>
+      ) : null}
+      <div className="flex flex-wrap justify-around  items-start gap-4 pb-44  pr-2 pl-2 pt-4  w-screen h-screen overflow-y-auto">
+        {cardItems && cardItems.length === 0 ? (
           <div className="w-full flex flex-col items-center gap-5">
-            <div className="bg-red text-center  p-4 font-firstFont rounded w-60 flex items-center justify-center gap-2"><span><ProductionQuantityLimitsIcon className='scale-110'/></span> <span className="text-sm font-semibold font-secondFont">سبد خرید خالی است</span></div>
-            <Link to='/videos?page=1'><button type="button" className="w-40 bg-orange text-xs  text-dark font-bold font-secondFont p-3 rounded-lg shadow-sm shadow-dark sm:hover:scale-105 duration-150 ease-out"> <span><VideoLibraryOutlinedIcon className='mr-1 font-bold' /></span><span>ویدیوهای آموزشی</span></button></Link> 
+            <div className="text-center  p-4 font-firstFont rounded w-60 flex items-center justify-center gap-2">
+              <span className="w-28 h-28 text-sm font-semibold font-secondFont">
+                <img src="/images/emptycart.png" alt="empty shopping cart" />
+              </span>
+            </div>
+            <Link to="/videos?page=1" className="w-28 md:w-32 lg:w-40">
+              <button type="button" className={homeBtnStyleHorizontal}>
+                <span>
+                  <OndemandVideoRoundedIcon />
+                </span>
+                <span>برو به ویدیوها</span>
+              </button>
+            </Link>
           </div>
-        ): (
-          cardItems && cardItems.map( (cardItem, index) => <CardItem key={ index } video={cardItem} />)
+        ) : (
+          cardItems &&
+          cardItems.map((cardItem, index) => (
+            <CardItem
+              key={index}
+              video={cardItem}
+              selectedCard={selectedCard}
+              selectedCardHandler={selectedCardHandler}
+            />
+          ))
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Cards
+export default Cards;

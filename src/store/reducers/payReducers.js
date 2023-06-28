@@ -1,4 +1,6 @@
 import * as actions from "../actions/actionTypes";
+import { toast } from "react-toastify";
+import { toastStyle as options } from "../../utils/styles";
 
 const payReducerInState = { payment: "", error: false, loading: false };
 
@@ -25,6 +27,7 @@ export const paymentStatusReducer = (
     case actions.GET_PAYMENT_STATUS_REQUEST:
       return { ...state, loading: true, error: false };
     case actions.GET_PAYMENT_STATUS_SUCCESS:
+      toast.error(action.payload, options);
       return { ...state, loading: false, error: false };
     case actions.GET_PAYMENT_STATUS_FAIL:
       return { ...state, loading: false, error: action.payload };

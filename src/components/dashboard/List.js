@@ -14,7 +14,7 @@ const List = () => {
 
   const [radioTimeRangeSelection, setRadioTimeRangeSelection] = useState(null);
   const [radioIfPurchasedSelection, setRadionIfPurchasedSelection] =
-    useState('purchased_or_not_purchased');
+    useState(null);
   const onRadioTimeRangeSelectionHandler = (e) => {
     setRadioTimeRangeSelection(e.target.value);
   };
@@ -24,7 +24,9 @@ const List = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (radioTimeRangeSelection || radioIfPurchasedSelection) {
-      dispatch(allUsersAction(radioTimeRangeSelection, radioIfPurchasedSelection));
+      dispatch(
+        allUsersAction(radioTimeRangeSelection, radioIfPurchasedSelection)
+      );
     }
   }, [dispatch, radioTimeRangeSelection, radioIfPurchasedSelection]);
 
@@ -39,11 +41,11 @@ const List = () => {
       {loading ? (
         <LoadingSpinner color />
       ) : error ? (
-        toast.error(error, options)
+        toast.error('خطا', options)
       ) : (
         <table className="w-full h-screen flex flex-col justify-start items-center gap-2">
           {allUsers.map((user, index) => (
-            <ListItem key={user._id} user={user} index={index} />
+            <ListItem key={index} user={user} index={index} />
           ))}
         </table>
       )}

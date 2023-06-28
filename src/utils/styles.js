@@ -8,12 +8,13 @@ export const toastStyle = {
   autoClose: 2000,
   pauseOnHover: false,
   style: {
-    bounce: "slide",
+    bounce:'slide',
     textAlign: "center",
     color: "#0e051b",
     fontFamily: "shabnam",
     fontSize: "11px",
     fontWeight: "bold",
-    backgroundColor: "#f0e8fb",
+    backgroundColor:"#f0e8fb",
+
   },
 };

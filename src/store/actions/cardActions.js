@@ -1,5 +1,8 @@
 import * as actions from "./actionTypes";
 import { vidsArr } from "../../utils/data";
+import { toast } from "react-toastify";
+
+
 
 export const addToCard = (videoId) => {
   return (dispatch) => {
@@ -15,6 +18,7 @@ export const addToCard = (videoId) => {
 export const removeFromCard = (videoId) => {
   return (dispatch) => {
     dispatch({ type: actions.REMOVE_FROM_CARD, payload: videoId });
+    localStorage.removeItem('cardItems');
   };
 };
 

@@ -1,7 +1,6 @@
 import * as actions from "../actions/actionTypes";
 import axios from "axios";
 import { signinAction } from "../actions/userActions";
-import { videoList } from "./videoActions";
 
 export const pay = (price, videoId) => {
   return async (dispatch, getState) => {
@@ -10,7 +9,7 @@ export const pay = (price, videoId) => {
     const userInfo = store.userSigninReducer.userInfo;
     try {
       const result = await axios.post(
-        "https://www.avayejaan.ir/api/pay",
+        "/api/pay",
         { price: price, videoId: videoId, userToken: userInfo.token },
         { headers: { Authorization: `Bearer ${userInfo.token}` } }
       );
@@ -27,11 +26,14 @@ export const getPaymentStatusAction = (status, order_id, payId) => {
     dispatch({ type: actions.GET_PAYMENT_STATUS_REQUEST });
     try {
       const { data } = await axios.post(
-        "https://www.avayejaan.ir/api/pay/status",
-        { status: status, order_id: order_id, payId: payId }
+        "http://www.avayejaan.ir/api/pay/status",
+        { status, order_id, payId }
       );
       dispatch(signinAction(data.mail, data.name));
-      dispatch({ type: actions.GET_PAYMENT_STATUS_SUCCESS, payload: data });
+      dispatch({
+        type: actions.GET_PAYMENT_STATUS_SUCCESS,
+        payload: data,
+      });
     } catch (err) {
       console.log("getPaymentStatusAction axios error >>>", err);
       dispatch({ type: actions.GET_PAYMENT_STATUS_FAIL, payload: err.message });

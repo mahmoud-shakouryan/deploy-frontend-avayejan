@@ -3,10 +3,15 @@ import DashboardHome from "../../components/dashboard/DashboardHome";
 import List from "../../components/dashboard/List";
 import Single from "../../components/dashboard/Single";
 import New from "../../components/dashboard/New";
+import Navbar from "../../components/dashboard/Navbar";
 
-const Dashboard = () => {       //  /admin/*
+const Dashboard = () => {
+  //  /admin/*
   return (
-    <div className="w-screen h-screen pt-10">
+    <div className="w-screen h-screen flex flex-col overflow-x-hidden">
+      <div>
+        <Navbar />
+      </div>
       <Routes>
         <Route path="/">
           <Route index element={<DashboardHome />} />

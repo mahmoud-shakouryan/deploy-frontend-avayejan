@@ -43,7 +43,7 @@ export const myVidsAction = (status, userId, payId, order_id) => {
     dispatch({ type: actions.MY_VIDS_REQUEST });
     try {
       const { data } = await axios.post(
-        "https://www.avayejaan.ir/api/videos/uservids",
+        "http://www.avayejaan.ir/api/videos/uservids",
         { status, userId, payId, order_id }
       );
       dispatch({ type: actions.MY_VIDS_SUCCESS, payload: data });
@@ -58,10 +58,9 @@ export const myVidsLinksAction = (allFiles) => {
     dispatch({ type: actions.LINK_REQUEST });
     try {
       const { data } = await axios.post(
-        "https://www.avayejaan.ir/api/videos/myvidslinks",
+        "http://www.avayejaan.ir/api/videos/myvidslinks",
         { allFiles: allFiles }
       );
-      console.log("links action", data);
       dispatch({ type: actions.LINK_SUCCESS, payload: data });
     } catch (err) {
       console.log("linksAction axios error >>>", err);
