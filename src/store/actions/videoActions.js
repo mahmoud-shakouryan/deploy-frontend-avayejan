@@ -23,7 +23,7 @@ export const videoDetails = (id) => {
   return (dispatch) => {
     try {
       dispatch({ type: actions.VIDEO_DETAILS_REQUEST });
-      const video = vidsArr.find((video) => video.id === id);
+      const video = vidsArr.find((video) => video.id === +id);
       if (!video) {
         return dispatch({
           type: actions.VIDEO_DETAILS_FAIL,

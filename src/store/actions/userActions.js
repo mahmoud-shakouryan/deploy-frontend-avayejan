@@ -34,10 +34,7 @@ export const signupAction = (name, email, password, confirmPassword) => {
       });
       dispatch({ type: actions.USER_SIGNUP_SUCCESS, payload: data });
       dispatch({ type: actions.USER_SIGNIN_SUCCESS, payload: data });
-      toast.success(
-        "عزیز، ایجاد حساب انجام شد، خوش آمدی " + data.name,
-        options
-      );
+      toast.success(`وارد شدید`, options);
     } catch (error) {
       dispatch({
         type: actions.USER_SIGNUP_FAIL,
