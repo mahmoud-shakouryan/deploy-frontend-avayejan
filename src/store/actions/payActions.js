@@ -26,7 +26,7 @@ export const getPaymentStatusAction = (status, order_id, payId) => {
     dispatch({ type: actions.GET_PAYMENT_STATUS_REQUEST });
     try {
       const { data } = await axios.post(
-        "http://www.avayejaan.ir/api/pay/status",
+        "https://www.avayejaan.ir/api/pay/status",
         { status, order_id, payId }
       );
       dispatch(signinAction(data.mail, data.name));
